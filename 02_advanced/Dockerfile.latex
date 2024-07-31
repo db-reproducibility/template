@@ -3,4 +3,4 @@ RUN apt-get update && apt-get install -y texlive-full
 
 WORKDIR /data/paper
 
-CMD ["pdflatex", "paper.tex"]
+CMD ["latexmk", "-pdf", "-interaction=nonstopmode", "-synctex=1", "-f", "paper.tex"]
