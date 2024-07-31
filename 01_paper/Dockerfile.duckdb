@@ -1,15 +1,20 @@
 # Use Ubuntu as the base image
 FROM ubuntu:22.04 AS duckdb
+
 # Install the necessary dependencies
 RUN apt-get update && apt-get install -y \
   build-essential cmake git
+
 # Clone the DuckDB repository
-RUN git clone --depth 1 --branch v0.10.1 \
+RUN git clone --depth 1 --branch v1.0.0 \
   https://github.com/duckdb/duckdb.git
+
 # Build DuckDB
 WORKDIR /duckdb
 RUN make release -j4
+
 # Add the DuckDB binary to the PATH
 ENV PATH="/duckdb/build/release:${PATH}"
+
 # Define the entrypoint
 ENTRYPOINT ["duckdb"]

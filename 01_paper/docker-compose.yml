@@ -5,6 +5,7 @@ services:
       - type: bind
         source: ./data
         target: /data
+      - postgres_volume:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -20,3 +21,6 @@ services:
         target: /data
     working_dir: /data
     entrypoint: [ "/bin/bash", "run-experiments-duckdb.sh" ]
+
+volume:
+  postgres_volume:
