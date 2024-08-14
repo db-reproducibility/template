@@ -20,7 +20,6 @@ services:
         source: ./data
         target: /data
     working_dir: /data
-    entrypoint: [ "/bin/bash", "run-experiments-duckdb.sh" ]
 
-volume:
+volumes:
   postgres_volume:

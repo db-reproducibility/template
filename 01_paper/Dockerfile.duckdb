@@ -11,10 +11,7 @@ RUN git clone --depth 1 --branch v1.0.0 \
 
 # Build DuckDB
 WORKDIR /duckdb
-RUN make release -j4
+RUN BUILD_TPCH=1 make release -j4
 
 # Add the DuckDB binary to the PATH
 ENV PATH="/duckdb/build/release:${PATH}"
-
-# Define the entrypoint
-ENTRYPOINT ["duckdb"]

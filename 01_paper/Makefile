@@ -1,12 +1,23 @@
 run: # Run the experiments
-	@echo "Setup environment to run experiments"
-	@docker compose up -d --wait
+	@echo "Start live services to run experiments"
+	@docker compose up postgres -d --wait
+	@echo
 
-	@echo "Run PostgreSQL experiments"
-	@docker compose exec postgres bash "run-experiments.sh"
+	@echo "Setup TPC-H on DuckDB"
+	@docker compose run --rm duckdb bash "scripts/generate-tpch-duckdb.sh"
+	@echo
+
+	@echo "Setup TPC-H on PostgreSQL"
+	@docker compose exec postgres bash "scripts/load-tpch-postgres.sh"
+	@echo
 
 	@echo "Run DuckDB experiments"
-	@docker compose run --rm duckdb bash "run-experiments-duckdb.sh"
+	@docker compose run --rm duckdb bash "scripts/run-experiments-duckdb.sh"
+	@echo
+
+	@echo "Run PostgreSQL experiments"
+	@docker compose exec postgres bash "scripts/run-experiments-postgres.sh"
 
 clean: # Clean up the environment
 	docker compose down -v
+	rm -rf data/{queries,tables,duckdb.db}
