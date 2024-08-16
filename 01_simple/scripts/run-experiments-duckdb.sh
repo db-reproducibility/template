@@ -3,7 +3,7 @@
 echo "runtime" > data/duckdb.csv
 for FILE in `ls /project/queries/*.sql | sort -V`; do
   EXPERIMENT=`basename "$FILE"`
-  echo -n "* Running experiment '$EXPERIMENT'..."
+  echo -n "* Running '$EXPERIMENT'..."
   # Run the experiment and measure the time
   OUTPUT=`duckdb data/duckdb.db -init <(printf ".timer on\n.mode trash") < "$FILE"`
   # Extract the time from the output

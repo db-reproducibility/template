@@ -18,12 +18,12 @@ To reproduce the experiments, follow these steps:
 * Clone the repository
 * In a terminal, navigate to the repository and run the following command:
   ```bash
-  make run
+  ./run.sh
   ```
 * The experiments will run and the results will be stored in the `data` directory.
 
 ## Cleanup
 To cleanup, run the following command:
 ```bash
-make clean
+rm -r data
 ```
