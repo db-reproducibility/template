@@ -1,0 +1,193 @@
+% VLDB template version of 2020-08-03 enhances the ACM template, version 1.7.0:
+% https://www.acm.org/publications/proceedings-template
+% The ACM Latex guide provides further information about the ACM template
+
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\documentclass[sigconf, nonacm]{acmart}
+
+\usepackage{lipsum}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usepackage{contour}
+
+%% The following content must be adapted for the final version
+% paper-specific
+\newcommand\vldbdoi{XX.XX/XXX.XX}
+\newcommand\vldbpages{XXX-XXX}
+% issue-specific
+\newcommand\vldbvolume{14}
+\newcommand\vldbissue{1}
+\newcommand\vldbyear{2020}
+% should be fine as it is
+\newcommand\vldbauthors{\authors}
+\newcommand\vldbtitle{\shorttitle}
+% leave empty if no availability url should be set
+\newcommand\vldbavailabilityurl{URL_TO_YOUR_ARTIFACTS}
+% whether page numbers should be shown or not, use 'plain' for review versions, 'empty' for camera ready
+\newcommand\vldbpagestyle{plain}
+
+\begin{document}
+\title{A Relational Model of Data for Large Shared Data Banks}
+
+%%
+%% The "author" command and its associated commands are used to define the authors and their affiliations.
+\author{Ben Trovato}
+\affiliation{%
+  \institution{Institute for Clarity in Documentation}
+  \streetaddress{P.O. Box 1212}
+  \city{Dublin}
+  \state{Ireland}
+  \postcode{43017-6221}
+}
+\email{trovato@corporation.com}
+
+\author{Lars Th{\o}rv{\"a}ld}
+\orcid{0000-0002-1825-0097}
+\affiliation{%
+\institution{The Th{\o}rv{\"a}ld Group}
+\streetaddress{1 Th{\o}rv{\"a}ld Circle}
+\city{Hekla}
+\country{Iceland}
+}
+\email{larst@affiliation.org}
+
+\author{Valerie B\'eranger}
+\orcid{0000-0001-5109-3700}
+\affiliation{%
+  \institution{Inria Paris-Rocquencourt}
+  \city{Rocquencourt}
+  \country{France}
+}
+\email{vb@rocquencourt.com}
+
+\author{J\"org von \"Arbach}
+\affiliation{%
+  \institution{University of T\"ubingen}
+  \city{T\"ubingen}
+  \country{Germany}
+}
+\email{jaerbach@uni-tuebingen.edu}
+\email{myprivate@email.com}
+\email{second@affiliation.mail}
+
+\author{Wang Xiu Ying}
+\author{Zhe Zuo}
+\affiliation{%
+  \institution{East China Normal University}
+  \city{Shanghai}
+  \country{China}
+}
+\email{firstname.lastname@ecnu.edu.cn}
+
+\author{Donald Fauntleroy Duck}
+\affiliation{%
+  \institution{Scientific Writing Academy}
+  \city{Duckburg}
+  \country{Calisota}
+}
+\affiliation{%
+  \institution{Donald's Second Affiliation}
+  \city{City}
+  \country{country}
+}
+\email{donald@swa.edu}
+
+%%
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+  \lipsum[1]
+\end{abstract}
+
+\maketitle
+
+%%% do not modify the following VLDB block %%
+%%% VLDB block start %%%
+\pagestyle{\vldbpagestyle}
+\begingroup\small\noindent\raggedright\textbf{PVLDB Reference Format:}\\
+\vldbauthors. \vldbtitle. PVLDB, \vldbvolume(\vldbissue): \vldbpages, \vldbyear.\\
+\href{https://doi.org/\vldbdoi}{doi:\vldbdoi}
+\endgroup
+\begingroup
+\renewcommand\thefootnote{}\footnote{\noindent
+  This work is licensed under the Creative Commons BY-NC-ND 4.0 International License. Visit \url{https://creativecommons.org/licenses/by-nc-nd/4.0/} to view a copy of this license. For any use beyond those covered by this license, obtain permission by emailing \href{mailto:info@vldb.org}{info@vldb.org}. Copyright is held by the owner/author(s). Publication rights licensed to the VLDB Endowment. \\
+  \raggedright Proceedings of the VLDB Endowment, Vol. \vldbvolume, No. \vldbissue\ %
+  ISSN 2150-8097. \\
+  \href{https://doi.org/\vldbdoi}{doi:\vldbdoi} \\
+}\addtocounter{footnote}{-1}\endgroup
+%%% VLDB block end %%%
+
+%%% do not modify the following VLDB block %%
+%%% VLDB block start %%%
+\ifdefempty{\vldbavailabilityurl}{}{
+  \vspace{.3cm}
+  \begingroup\small\noindent\raggedright\textbf{PVLDB Artifact Availability:}\\
+  The source code, data, and/or other artifacts have been made available at \url{\vldbavailabilityurl}.
+  \endgroup
+}
+%%% VLDB block end %%%
+
+\begin{figure*}[t]
+  \centering
+  \begin{tikzpicture}[%
+      rounded corners=0.3pt,                      %% soften the edges a bit
+    ]
+    \begin{axis}[%
+        width=\textwidth,                         %% make full use of the entire page width
+        height=8cm,                               %% set the height to something reasonable
+        ybar,                                     %% plot as bart chart
+        bar width=0.2cm,                          %% set the width of the bars, pgfplots defaults are unsightly
+        xlabel={TPC-H Query},                     %% we're plotting TPC-H queries on the x-axis
+        ylabel={Runtime [ms]},                    %% be explicit about the y-axis (including units)
+        nodes near coords={\contour{white}{\pgfmathprintnumber\pgfplotspointmeta}},  %% show the exact runtime on and include a contour to make them pop
+        nodes near coords align={vertical},       %% place runtimes on the top of the bars
+        ymode=log,                                %% use a logarithmic scale for y-axis
+        ymin=0,                                   %% start the y-axis at 0ms
+        ymajorgrids=true,                         %% show horizontal grid lines
+        xtick={1,2,...,22},                       %% we're plotting all 22 queries
+        xticklabel={Q\pgfmathprintnumber{\tick}}, %% use Q1, Q2, ..., Q22 as labels
+        enlarge x limits=0.05,                    %% stretch the x-axis a bit, otherwise some bars are cut off
+        xtick style={draw=none},                  %% don't draw the actual x-ticks, but leave their labels untouched
+        minor xtick={0.5,1.5,...,22.5},           %% add some minor x-ticks and...
+        xminorgrids=true,                         %% ...draw some gridlines on them
+        legend style={%
+            at={(0.5,-0.2)},                      %% place the legend below the plot
+            anchor=north,                         %% anchor it to the north, otherwise it will collide with the x-ticks
+            legend columns=-1                     %% use as many columns as necessary
+          },
+      ]
+
+      \addplot[  %% plot the DuckDB runtimes from the CSV file
+        draw=BurntOrange,
+        fill=BurntOrange!40!white,
+      ] table [
+          col sep=comma,
+          x expr=\coordindex + 1,
+          y expr=\thisrow{runtime} * 1000 %% convert to ms since DuckDB measures in seconds!
+        ] {../data/duckdb.csv};
+
+      \addplot[  %% plot the PostgreSQL runtimes from the CSV file
+        draw=RoyalBlue,
+        fill=RoyalBlue!40!white,
+      ] table [
+          col sep=comma,
+          x expr=\coordindex + 1,
+          y=runtime
+        ] {../data/postgres.csv};
+
+      \legend{DuckDB, PostgreSQL}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Comparing runtimes of DuckDB and PostgreSQL for all TPC-H queries at scale factor 1.}
+  \label{fig:runtime-comparison}
+\end{figure*}
+
+%\clearpage
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{sample}
+
+\end{document}
+\endinput

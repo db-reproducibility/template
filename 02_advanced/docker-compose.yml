@@ -1,14 +1,4 @@
 services:
-  postgres:
-    image: postgres:16
-    volumes:
-      - type: bind
-        source: ./data
-        target: /data
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_HOST_AUTH_METHOD: trust
-    working_dir: /data
   duckdb:
     image: duckdb
     build:
@@ -16,17 +6,37 @@ services:
       dockerfile: Dockerfile.duckdb
     volumes:
       - type: bind
-        source: ./data
-        target: /data
-    working_dir: /data
-    entrypoint: [ "/bin/bash", "run-experiments-duckdb.sh" ]
-
-  latex:
-    image: latex
-    build:
-      context: .
-      dockerfile: Dockerfile.latex
+        source: .
+        target: /project
+    working_dir: /project
+  postgres:
+    image: postgres:16
     volumes:
       - type: bind
-        source: ./data
-        target: /data
+        source: .
+        target: /project
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    working_dir: /project
+  latex:
+    image: danteev/texlive
+    volumes:
+      - type: bind
+        source: .
+        target: /project
+    working_dir: /project/paper
+    entrypoint:
+      [
+        "latexmk",
+        "-pdf",
+        "-interaction=nonstopmode",
+        "-shell-escape",
+        "-synctex=1",
+        "-f",
+        "main.tex"
+      ]
+
+volumes:
+  postgres_volume:

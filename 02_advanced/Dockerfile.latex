@@ -1,6 +1,5 @@
-FROM ubuntu:22.04 AS latex
-RUN apt-get update && apt-get install -y texlive-full
+FROM danteev/texlive AS latex
 
-WORKDIR /data/paper
+WORKDIR /project/paper
 
-CMD ["latexmk", "-pdf", "-interaction=nonstopmode", "-synctex=1", "-f", "paper.tex"]
+CMD ["latexmk", "-pdf", "-interaction=nonstopmode", "-shell-escape", "-synctex=1", "-f", "main.tex"]
