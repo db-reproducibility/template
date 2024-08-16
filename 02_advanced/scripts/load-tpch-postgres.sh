@@ -98,14 +98,14 @@ echo "done"
 
 echo -n "* Loading data..."
 psql -q -U postgres 2>&1 > /dev/null <<EOF
-  \COPY part     FROM 'data/tables/part.csv'     DELIMITER ',' CSV HEADER;
-  \COPY region   FROM 'data/tables/region.csv'   DELIMITER ',' CSV HEADER;
-  \COPY nation   FROM 'data/tables/nation.csv'   DELIMITER ',' CSV HEADER;
-  \COPY supplier FROM 'data/tables/supplier.csv' DELIMITER ',' CSV HEADER;
-  \COPY partsupp FROM 'data/tables/partsupp.csv' DELIMITER ',' CSV HEADER;
-  \COPY customer FROM 'data/tables/customer.csv' DELIMITER ',' CSV HEADER;
-  \COPY orders   FROM 'data/tables/orders.csv'   DELIMITER ',' CSV HEADER;
-  \COPY lineitem FROM 'data/tables/lineitem.csv' DELIMITER ',' CSV HEADER;
+  \COPY part     FROM '/project/data/setup/part.csv'     DELIMITER ',' CSV HEADER;
+  \COPY region   FROM '/project/data/setup/region.csv'   DELIMITER ',' CSV HEADER;
+  \COPY nation   FROM '/project/data/setup/nation.csv'   DELIMITER ',' CSV HEADER;
+  \COPY supplier FROM '/project/data/setup/supplier.csv' DELIMITER ',' CSV HEADER;
+  \COPY partsupp FROM '/project/data/setup/partsupp.csv' DELIMITER ',' CSV HEADER;
+  \COPY customer FROM '/project/data/setup/customer.csv' DELIMITER ',' CSV HEADER;
+  \COPY orders   FROM '/project/data/setup/orders.csv'   DELIMITER ',' CSV HEADER;
+  \COPY lineitem FROM '/project/data/setup/lineitem.csv' DELIMITER ',' CSV HEADER;
 EOF
 echo "done"
 

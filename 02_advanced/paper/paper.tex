@@ -166,7 +166,7 @@
           col sep=comma,
           x expr=\coordindex + 1,
           y expr=\thisrow{runtime} * 1000 %% convert to ms since DuckDB measures in seconds!
-        ] {../data/duckdb.csv};
+        ] {../data/results/duckdb.csv};
 
       \addplot[  %% plot the PostgreSQL runtimes from the CSV file
         draw=RoyalBlue,
@@ -175,7 +175,7 @@
           col sep=comma,
           x expr=\coordindex + 1,
           y=runtime
-        ] {../data/postgres.csv};
+        ] {../data/results/postgres.csv};
 
       \legend{DuckDB, PostgreSQL}
     \end{axis}

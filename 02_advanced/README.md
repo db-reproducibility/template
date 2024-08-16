@@ -3,7 +3,7 @@ This repository contains the artifacts for the tutorial "A Reproducible Tutorial
 on Reproducibility in Database Systems Research".
 
 ## Software Requirements
-The artifact requires Docker and Docker Compose.
+The artifact requires Make, Docker and Docker Compose.
 
 ## Hardware Requirements
 At least 4GB of memory and 2 CPU cores are required.
@@ -18,12 +18,13 @@ To reproduce the experiments, follow these steps:
 * Clone the repository
 * In a terminal, navigate to the repository and run the following command:
   ```bash
-  ./run.sh
+  make paper
   ```
 * The experiments will run and the results will be stored in the `data` directory.
+* The paper PDF will be built using the new experimental results and stored in the `data` directory.
 
 ## Cleanup
 To cleanup, run the following command:
 ```bash
-rm -r data
+make clean
 ```

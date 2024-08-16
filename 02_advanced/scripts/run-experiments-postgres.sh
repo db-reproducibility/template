@@ -1,9 +1,10 @@
 #!/bin/bash
 
-echo "runtime" > data/postgres.csv
+mkdir -p /project/data/results
+echo "runtime" > /project/data/results/postgres.csv
 for FILE in `ls /project/queries/*.sql | sort -V`; do
   EXPERIMENT=`basename "$FILE"`
-  echo -n "* Running experiment '$EXPERIMENT'..."
+  echo -n "* Running '$EXPERIMENT'..."
   # Run the experiment and measure the time
   OUTPUT=`psql -U postgres -c "\timing on" -f "$FILE"`
   # Extract the time from the output
@@ -11,5 +12,5 @@ for FILE in `ls /project/queries/*.sql | sort -V`; do
                        | tail -n1 | sed 's/Time: //'`
   # Print the time and write it to the results file
   echo -e "done\tTime: $TIME"
-  echo "$TIME" >> data/postgres.csv
+  echo "$TIME" >> /project/data/results/postgres.csv
 done

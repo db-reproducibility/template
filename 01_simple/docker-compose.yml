@@ -16,6 +16,12 @@ services:
         source: .
         target: /project
       - postgres_volume:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 60s
+      retries: 5
+      start_period: 80s
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_HOST_AUTH_METHOD: trust
