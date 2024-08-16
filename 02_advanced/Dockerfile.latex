@@ -1,5 +1,0 @@
-FROM danteev/texlive AS latex
-
-WORKDIR /project/paper
-
-CMD ["latexmk", "-pdf", "-interaction=nonstopmode", "-shell-escape", "-synctex=1", "-f", "main.tex"]
