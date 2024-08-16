@@ -1,11 +1,11 @@
-# Encapsulate `02_advanced` in Docker
+# Encapsulate `03_advanced` in Docker
 
 This folder contains the Dockerfile and the necessary files to encapsulate the
-`02_advanced` project in a Docker container. The Dockerfile is based on the
+`03_advanced` project in a Docker container. The Dockerfile is based on the
 `docker:27-dind` image, which is a Docker-in-Docker image that allows running
 Docker commands inside a Docker container.
 
-This setup is useful for running the `02_advanced` project in a controlled
+This setup is useful for running the `03_advanced` project in a controlled
 environment, without the need to install all the dependencies on the host
 machine. The Docker container encapsulates all the dependencies and the project
 itself, making it easy to run the project on any machine that has Docker
