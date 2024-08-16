@@ -26,17 +26,7 @@ services:
       - type: bind
         source: .
         target: /project
-    working_dir: /project/paper
-    entrypoint:
-      [
-        "latexmk",
-        "-pdf",
-        "-interaction=nonstopmode",
-        "-shell-escape",
-        "-synctex=1",
-        "-f",
-        "main.tex"
-      ]
+    working_dir: /project
 
 volumes:
   postgres_volume:
