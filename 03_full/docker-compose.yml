@@ -1,0 +1,10 @@
+services:
+  docker:
+    image: runner
+    privileged: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./project:/project
+    working_dir: /project
