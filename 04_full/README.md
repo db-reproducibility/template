@@ -32,7 +32,7 @@ docker compose up -d
 To access the Docker container, run the following command:
 
 ```bash
-docker compose exec runner sh
+docker compose exec docker sh
 ```
 
 ## Stopping the Docker container
